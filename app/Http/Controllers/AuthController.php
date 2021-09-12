@@ -27,6 +27,14 @@ class AuthController extends Controller
         return response()->json("error", 400, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function logout(Request $request)
+    {
+        if (parent::authorize($request)) {
+            $request->session()->remove('user');
+            return response()->json('success', 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+    }
+
     public function registration(Request $request)
     {
         $request->session()->remove('user');

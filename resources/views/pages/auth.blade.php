@@ -75,10 +75,7 @@
             api.post({
                 url: '/auth/login',
                 body: loginData,
-                onSuccess: function(data) {
-                    window.location.href = '/';
-                }
-            })
+            }).then(result => window.location.href = '/')
         }
 
         function registration() {
@@ -94,10 +91,7 @@
             api.post({
                 url: '/auth/registration',
                 body: registrationData,
-                onSuccess: function(data) {
-                    window.location.href = '/auth';
-                }
-            })
+            }).then(result => window.location.href = '/auth')
         }
     });
 </script>

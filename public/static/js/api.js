@@ -1,25 +1,27 @@
-// params: {type: string, url: string, body: {}, onSuccess: func, onError: func}
+// params: {type: string, url: string, body: {}, dataType: string}
 function _request(params) {
-    $.ajax({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        type: params.type,
-        url: params.url,
-        dataType: "json",
-        data: params.body,
-        processData: false,
-        contentType: false,
-        success: params.onSuccess,
-        error: params.onError,
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: params.type,
+            url: params.url,
+            dataType: params.dataType || "json",
+            data: params.body,
+            processData: false,
+            contentType: false,
+            success: (data) => resolve(data),
+            error: (data) => reject(data),
+        });
     });
 }
 
 const api = {
     get: (params) => {
-        _request({ type: "GET", ...params });
+        return _request({ type: "GET", ...params });
     },
     post: (params) => {
-        _request({ type: "POST", ...params });
+        return _request({ type: "POST", ...params });
     },
 };

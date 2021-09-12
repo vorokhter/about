@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div style="background: rgb(186, 191, 209); min-height: 100vh; font-family: 'Roboto', sans-serif;">
+    <div style="background: #fff; min-height: 100vh; font-family: 'Roboto', sans-serif;">
         @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>

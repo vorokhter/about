@@ -20,6 +20,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/auth/registration', [AuthController::class, 'registration'])->name('auth.registration');
 
 Route::post('/thread/personal', [ThreadController::class, 'getPersonal'])->name('thread.getPersonal');
+Route::post('/thread/message-list', [ThreadController::class, 'getMessageList'])->name('thread.getMessageList');
+Route::post('/thread/send-message', [ThreadController::class, 'sendMessage'])->name('thread.sendMessage');

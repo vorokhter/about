@@ -12,7 +12,9 @@ class HomeController extends Controller
         if (!parent::authorize($request)) return redirect()->route('auth');
 
         $users = User::orderBy('name')->get();
+
         return view('pages.index', [
+            'currentUser' => ['id' => $request->session()->get("user")->id, 'name' => $request->session()->get("user")->name],
             'users' => $users,
         ]);
     }
