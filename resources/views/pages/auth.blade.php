@@ -6,14 +6,15 @@
 
 <script>
     $(document).ready(function() {
-        var loginForm = $("#login-form");
-        var registrationForm = $("#registration-form");
+        const loginForm = $("#login-form");
+        const registrationForm = $("#registration-form");
 
         loginForm.on("submit", function(event) {
             event.preventDefault();
             login();
 
         });
+
         registrationForm.on("submit", function(event) {
             event.preventDefault();
             registration();
@@ -24,12 +25,12 @@
             loginForm.hide();
             registrationForm.show();
         });
+
         $("#login-button").on("click", function(event) {
             event.preventDefault();
             registrationForm.hide();
             loginForm.show();
         });
-
 
         function loginValidation() {
             if ($('#inputLoginEmail').val().length <= 0) {
@@ -66,61 +67,38 @@
         function login() {
             if (!loginValidation()) return;
 
-            var loginData = new FormData();
+            const loginData = new FormData();
 
             loginData.append('email', $('#inputLoginEmail').val());
             loginData.append('password', $('#inputLoginPassword').val());
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST', // отправляем в POST формате, можно GET
-                url: '/auth/login', // путь дo обработчика
-                dataType: 'json', // ответ ждём в json формате
-                data: loginData, // данные для отправки
-                enctype: 'multipart/form-data',
-                processData: false, // tell jQuery not to process the data
-                contentType: false, // tell jQuery not to set contentType
-                success: function(data) { // событие в случае удачного запроса
+            api.post({
+                url: '/auth/login',
+                body: loginData,
+                onSuccess: function(data) {
                     window.location.href = '/';
-                },
-                complete: function(data) {
-                    //console.log("что то сделало!!!")
                 }
-            });
+            })
         }
 
         function registration() {
             if (!registrationValidation()) return;
 
-            var registrationData = new FormData();
+            const registrationData = new FormData();
 
             registrationData.append('name', $('#inputRegistrationName').val());
             registrationData.append('email', $('#inputRegistrationEmail').val());
             registrationData.append('password', $('#inputRegistrationPassword').val());
             registrationData.append('passwordConfirm', $('#inputRegistrationPasswordConfirm').val());
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST', // отправляем в POST формате, можно GET
-                url: '/auth/registration', // путь дo обработчика
-                dataType: 'json', // ответ ждём в json формате
-                data: registrationData, // данные для отправки
-                enctype: 'multipart/form-data',
-                processData: false, // tell jQuery not to process the data
-                contentType: false, // tell jQuery not to set contentType
-                success: function(data) { // событие в случае удачного запроса
+            api.post({
+                url: '/auth/registration',
+                body: registrationData,
+                onSuccess: function(data) {
                     window.location.href = '/auth';
-                },
-                complete: function(data) {
-                    //console.log("что то сделало!!!")
                 }
-            });
+            })
         }
-
     });
 </script>
 
