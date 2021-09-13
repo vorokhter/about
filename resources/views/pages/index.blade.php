@@ -60,7 +60,7 @@
 @include('includes.header')
 
 <main>
-    <div class="container">
+    <div class="container" style="max-width: 960px;">
         <div class="row">
             <div class="col-md-3">
                 <ul class="list-group mt-3">
@@ -77,6 +77,8 @@
                     <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Введите сообщение">
                     <label for="inputMessage" class="form-label">Введите сообщение</label>
                 </div>
+
+                <button type="button" class="btn btn-primary">Primary</button>
 
             </div>
         </div>
