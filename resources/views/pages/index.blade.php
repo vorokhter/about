@@ -7,15 +7,19 @@
 <script>
     $(document).ready(function() {
 
+        const messageList = document.getElementById("message-list");
+
         let currentThreadId;
         let timerId;
 
         function startMessagesInterval() {
             sendMessage()
 
-            // timerId = setInterval(() => {
-            //     sendMessage()
-            // }, 2000);
+            timerId = setInterval(() => {
+                sendMessage()
+            }, 2000);
+
+            messageList.scrollTop = messageList.scrollHeight;
 
         }
 
