@@ -26,4 +26,9 @@ class User extends Model
         ]);
         return $new_user;
     }
+
+    public static function getUserNameById($id)
+    {
+        return self::where('id', $id)->get()->first()->name;
+    }
 }

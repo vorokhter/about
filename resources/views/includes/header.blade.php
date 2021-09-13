@@ -12,7 +12,7 @@
 
 
 
-<div class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+<div class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container d-flex">
         <a class="navbar-brand" href="{{ url('/') }}">
             about...

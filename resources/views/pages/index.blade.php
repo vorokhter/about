@@ -13,9 +13,9 @@
         function startMessagesInterval() {
             sendMessage()
 
-            timerId = setInterval(() => {
-                sendMessage()
-            }, 2000);
+            // timerId = setInterval(() => {
+            //     sendMessage()
+            // }, 2000);
 
         }
 
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-9">
 
-                <div id="message-list" class="border rounded-2 mt-3 overflow-auto" style="width: 100%; height: 50vh;"></div>
+                <div id="message-list" class="border rounded-2 mt-3 overflow-auto bg-white" style="width: 100%; height: 50vh;"></div>
 
                 <div class="form-floating mb-3 mt-3">
                     <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Введите сообщение">
