@@ -11,14 +11,14 @@
         let timerId;
 
         function startMessagesInterval() {
-            sendMessage()
+            getMessageList()
 
             timerId = setInterval(() => {
-                sendMessage()
+                getMessageList()
             }, 2000);
         }
 
-        function sendMessage() {
+        function getMessageList() {
             api.post({
                     url: "/thread/message-list",
                     body: JSON.stringify({
@@ -26,7 +26,10 @@
                     }),
                     dataType: "text",
                 })
-                .then(result => $('#message-list').html(result));
+                .then(result => {
+                    $('#message-list').html(result);
+                    $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
+                });
         }
 
         $(".user-title").on("click", function(event) {
@@ -39,7 +42,6 @@
                 currentThreadId = result.id;
                 clearInterval(timerId);
                 startMessagesInterval();
-                $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
             })
         });
 
@@ -54,7 +56,6 @@
                 }),
             }).then(result => {
                 $('#inputMessage').val('');
-                $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
             });
         })
     });
