@@ -78,8 +78,6 @@
                     <label for="inputMessage" class="form-label">Введите сообщение</label>
                 </div>
 
-                <button type="button" class="btn btn-primary">Primary</button>
-
             </div>
         </div>
     </div>
