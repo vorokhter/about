@@ -13,7 +13,6 @@
         function startMessagesInterval() {
             sendMessage()
 
-
             timerId = setInterval(() => {
                 sendMessage()
             }, 2000);
@@ -27,10 +26,7 @@
                     }),
                     dataType: "text",
                 })
-                .then(result => {
-                    $('#message-list').html(result);
-                    $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
-                });
+                .then(result => $('#message-list').html(result));
         }
 
         $(".user-title").on("click", function(event) {
@@ -43,6 +39,7 @@
                 currentThreadId = result.id;
                 clearInterval(timerId);
                 startMessagesInterval();
+                $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
             })
         });
 
@@ -55,7 +52,10 @@
                     threadId: currentThreadId,
                     text: $('#inputMessage').val(),
                 }),
-            }).then(result => $('#inputMessage').val(''));
+            }).then(result => {
+                $('#inputMessage').val('');
+                $('#message-list').scrollTop($('#message-list').prop("scrollHeight"));
+            });
         })
     });
 </script>
