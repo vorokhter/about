@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\Models\User;
 use \App\Models\Thread;
 use \App\Models\Message;
 use \App\Models\Participation;
@@ -15,11 +16,20 @@ class ThreadController extends Controller
 
         if ($thread) return $thread;
 
-        $new_thread = Thread::createThread("тред", $request->session()->get("user")->id, 1);
+        $new_thread = Thread::createThread(" ", $request->session()->get("user")->id, 1);
 
         Participation::inviteUser($new_thread->id, json_decode($request->getContent())->userId);
 
         return $new_thread;
+    }
+
+    public static function getThreadTitle($user, $thread)
+    {
+        if ($thread->personal == 0) return $thread->title;
+
+        if ($thread->creator_id == $user['id']) return Participation::getUserName($thread->id);
+
+        return User::getUserNameById($thread->creator_id);
     }
 
     public function getMessageList(Request $request)

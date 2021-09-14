@@ -32,17 +32,23 @@
                 });
         }
 
-        $(".user-title").on("click", function(event) {
-            api.post({
-                url: "/thread/personal",
-                body: JSON.stringify({
-                    userId: $(this).attr("data-user-id")
-                }),
-            }).then((result) => {
-                currentThreadId = result.id;
-                clearInterval(timerId);
-                startMessagesInterval();
-            })
+        $(".thread-title").on("click", function(event) {
+
+            currentThreadId = $(this).attr("data-thread-id");
+
+            clearInterval(timerId);
+            startMessagesInterval();
+
+            // api.post({
+            //     url: "/thread/personal",
+            //     body: JSON.stringify({
+            //         userId: $(this).attr("data-user-id")
+            //     }),
+            // }).then((result) => {
+            //     currentThreadId = result.id;
+            //     clearInterval(timerId);
+            //     startMessagesInterval();
+            // })
         });
 
         $("#inputMessage").on("keypress", function(event) {
@@ -57,7 +63,20 @@
             }).then(result => {
                 $('#inputMessage').val('');
             });
-        })
+        });
+
+        $("#inputSearch").on("keypress", function(event) {
+            api.post({
+                url: "/user/search-user",
+                body: JSON.stringify({
+                    text: $('#inputSearch').val(),
+                }),
+                dataType: "text",
+            }).then(result => {
+                $("#searchResult").empty();
+                $('#searchResult').html(result);
+            });
+        });
     });
 </script>
 
@@ -67,20 +86,22 @@
     <div class="container" style="max-width: 960px;">
         <div class="row">
             <div class="col-md-3">
+
+                <input autocomplete="off" class="form-control mt-3" value="" type="search" id="inputSearch" placeholder="Поиск пользователя" aria-label="Поиск" list="searchResult">
+                <datalist id="searchResult" class="bg-white" style="cursor: pointer"></datalist>
+
                 <ul class="list-group mt-3">
-                    @foreach($users as $user)
-                    <li class="list-group-item user-title" data-user-id="{{$user->id}}">{{ $user->name }}</li>
+                    @foreach($threads as $thread)
+                    <li class="list-group-item thread-title" style="cursor: pointer;" data-thread-id="{{$thread->id}}">{{\App\Http\Controllers\ThreadController::getThreadTitle($currentUser, $thread)}}</li>
                     @endforeach
                 </ul>
+
             </div>
             <div class="col-md-9">
 
                 <div id="message-list" class="border rounded-2 mt-3 overflow-auto bg-white pt-2 pb-3" style="width: 100%; height: 50vh;"></div>
 
-                <div class="form-floating mb-3 mt-3">
-                    <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Введите сообщение">
-                    <label for="inputMessage" class="form-label">Введите сообщение</label>
-                </div>
+                <input type="text" class="form-control mt-3" id="inputMessage" name="message" placeholder="Введите сообщение">
 
             </div>
         </div>

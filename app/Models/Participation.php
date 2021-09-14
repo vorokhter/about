@@ -20,4 +20,12 @@ class Participation extends Model
         ]);
         return $invite_user;
     }
+
+    public static function getUserName($threadId)
+    {
+        $user_name = self::join('users', 'participation.user_id', '=', 'users.id')
+            ->where("participation.thread_id", $threadId)->first()->name;
+
+        return $user_name;
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\ThreadController;
@@ -26,3 +27,5 @@ Route::post('/auth/registration', [AuthController::class, 'registration'])->name
 Route::post('/thread/personal', [ThreadController::class, 'getPersonal'])->name('thread.getPersonal');
 Route::post('/thread/message-list', [ThreadController::class, 'getMessageList'])->name('thread.getMessageList');
 Route::post('/thread/send-message', [ThreadController::class, 'sendMessage'])->name('thread.sendMessage');
+
+Route::post('/user/search-user', [UserController::class, 'searchUser'])->name('user.searchUser');

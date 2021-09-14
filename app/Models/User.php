@@ -14,7 +14,7 @@ class User extends Model
 
     public static function getUserByEmail($email)
     {
-        return self::where('email', $email)->get()->first();
+        return self::where('email', $email)->first();
     }
 
     public static function createUser($request)
@@ -29,6 +29,11 @@ class User extends Model
 
     public static function getUserNameById($id)
     {
-        return self::where('id', $id)->get()->first()->name;
+        return self::where('id', $id)->first()->name;
+    }
+
+    public static function searchUser($text)
+    {
+        return self::select('id', 'name')->whereRaw("name LIKE '%$text%'")->get();
     }
 }
