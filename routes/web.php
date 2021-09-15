@@ -26,6 +26,7 @@ Route::post('/auth/registration', [AuthController::class, 'registration'])->name
 
 Route::post('/thread/personal', [ThreadController::class, 'getPersonal'])->name('thread.getPersonal');
 Route::post('/thread/message-list', [ThreadController::class, 'getMessageList'])->name('thread.getMessageList');
+Route::get('/thread/thread-list', [ThreadController::class, 'getThreadList'])->name('thread.getThreadList');
 Route::post('/thread/send-message', [ThreadController::class, 'sendMessage'])->name('thread.sendMessage');
 
 Route::post('/user/search-user', [UserController::class, 'searchUser'])->name('user.searchUser');

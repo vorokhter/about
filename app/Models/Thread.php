@@ -23,7 +23,7 @@ class Thread extends Model
         return $personals;
     }
 
-    public static function getThreads($userId)
+    public static function getThreadList($userId)
     {
         $threads = self::join('participation', 'threads.id', '=', 'participation.thread_id')
             ->whereRaw("threads.creator_id = $userId OR participation.user_id = $userId")

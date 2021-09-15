@@ -7,6 +7,8 @@
 <script>
     $(document).ready(function() {
 
+        getThreadList();
+
         let currentThreadId;
         let timerId;
 
@@ -32,24 +34,23 @@
                 });
         }
 
-        $(".thread-title").on("click", function(event) {
+        function getThreadList() {
+            api.get({
+                    url: "/thread/thread-list",
+                    dataType: "text",
+                })
+                .then(result => {
+                    $('#thread-list').html(result);
 
-            currentThreadId = $(this).attr("data-thread-id");
+                    $(".thread-title").on("click", function(event) {
 
-            clearInterval(timerId);
-            startMessagesInterval();
+                        currentThreadId = $(this).attr("data-thread-id");
 
-            // api.post({
-            //     url: "/thread/personal",
-            //     body: JSON.stringify({
-            //         userId: $(this).attr("data-user-id")
-            //     }),
-            // }).then((result) => {
-            //     currentThreadId = result.id;
-            //     clearInterval(timerId);
-            //     startMessagesInterval();
-            // })
-        });
+                        clearInterval(timerId);
+                        startMessagesInterval();
+                    });
+                });
+        }
 
         $("#inputMessage").on("keypress", function(event) {
             if (event.which != 13) return;
@@ -73,8 +74,22 @@
                 }),
                 dataType: "text",
             }).then(result => {
-                $("#searchResult").empty();
-                $('#searchResult').html(result);
+                $("#search-list").empty();
+                $('#search-list').html(result);
+
+                $(".user-name").on("click", function(event) {
+                    api.post({
+                        url: "/thread/personal",
+                        body: JSON.stringify({
+                            userId: $(this).attr("data-user-id")
+                        }),
+                    }).then((result) => {
+                        $('#inputSearch').val('');
+                        $("#search-list").empty();
+
+                        getThreadList();
+                    });
+                });
             });
         });
     });
@@ -87,14 +102,10 @@
         <div class="row">
             <div class="col-md-3">
 
-                <input autocomplete="off" class="form-control mt-3" value="" type="search" id="inputSearch" placeholder="Поиск пользователя" aria-label="Поиск" list="searchResult">
-                <datalist id="searchResult" class="bg-white" style="cursor: pointer"></datalist>
+                <input class="form-control mt-3" type="search" id="inputSearch" placeholder="Поиск">
+                <ul id="search-list" class="list-group"></ul>
 
-                <ul class="list-group mt-3">
-                    @foreach($threads as $thread)
-                    <li class="list-group-item thread-title" style="cursor: pointer;" data-thread-id="{{$thread->id}}">{{\App\Http\Controllers\ThreadController::getThreadTitle($currentUser, $thread)}}</li>
-                    @endforeach
-                </ul>
+                <ul id="thread-list" class="list-group mt-3"></ul>
 
             </div>
             <div class="col-md-9">

@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+    public function getThreadList(Request $request)
+    {
+        $threads = Thread::getThreadList($request->session()->get("user")->id);
+
+        return view('includes.thread-list', [
+            'threads' => $threads,
+            'currentUser' => ['id' => $request->session()->get("user")->id, 'name' => $request->session()->get("user")->name],
+        ]);
+    }
+
     public function getPersonal(Request $request)
     {
         $thread = Thread::getPersonal(json_decode($request->getContent())->userId, $request->session()->get("user")->id);
