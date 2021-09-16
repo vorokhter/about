@@ -12,20 +12,17 @@ class Participation extends Model
     protected $table = 'participation';
     protected $fillable = ['thread_id', 'user_id'];
 
-    public static function inviteUser($threadId, $userId)
+    public static function inviteUser($thread_id, $user_id)
     {
-        $invite_user = self::create([
-            'thread_id' => $threadId,
-            'user_id' =>  $userId,
+        return self::create([
+            'thread_id' => $thread_id,
+            'user_id' =>  $user_id,
         ]);
-        return $invite_user;
     }
 
-    public static function getUserName($threadId)
+    public static function getUserName($thread_id)
     {
-        $user_name = self::join('users', 'participation.user_id', '=', 'users.id')
-            ->where("participation.thread_id", $threadId)->first()->name;
-
-        return $user_name;
+        return self::join('users', 'participation.user_id', '=', 'users.id')
+            ->where("participation.thread_id", $thread_id)->first()->name;
     }
 }

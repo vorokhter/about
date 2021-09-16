@@ -13,17 +13,17 @@ class Message extends Model
     protected $table = 'messages';
     protected $fillable = ['text', 'thread_id', 'user_id'];
 
-    public static function getMessageList($threadId)
+    public static function getMessageList($thread_id)
     {
-        return self::where('thread_id', "=", $threadId)->get();
+        return self::where('thread_id', "=", $thread_id)->get();
     }
 
-    public static function createMessage($text, $threadId, $currentUser)
+    public static function createMessage($text, $thread_id, $user_id)
     {
         return self::create([
             'text' => $text,
-            'thread_id' =>  $threadId,
-            'user_id' =>  $currentUser,
+            'thread_id' =>  $thread_id,
+            'user_id' =>  $user_id,
         ]);
     }
 }

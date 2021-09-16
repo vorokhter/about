@@ -18,6 +18,11 @@ class Controller extends BaseController
 
     public function unauthorizedResponse()
     {
-        return response()->json("Не авторизован!", 401, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        return self::responseJSON('Не авторизован', 401);
+    }
+
+    public static function responseJSON($message, $code)
+    {
+        return response()->json($message, $code, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

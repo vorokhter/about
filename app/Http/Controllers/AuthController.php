@@ -19,19 +19,19 @@ class AuthController extends Controller
 
         $user = User::getUserByEmail($request->email);
 
-        if ($user && $request->password == $user->password) {
-            $request->session()->put('user', $user);
-            return response()->json('success', 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
-        }
+        if (!$user) return parent::responseJSON('Пользователя не существует', 400);
 
-        return response()->json("error", 400, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        if ($request->password != $user->password) return parent::responseJSON('Неправильный пароль', 400);
+
+        $request->session()->put('user', $user);
+        return parent::responseJSON('success', 200);
     }
 
     public function logout(Request $request)
     {
         if (parent::authorize($request)) {
             $request->session()->remove('user');
-            return response()->json('success', 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+            return parent::responseJSON('success', 200);
         }
     }
 
@@ -41,11 +41,11 @@ class AuthController extends Controller
 
         $user = User::getUserByEmail($request->email);
 
-        if ($user) return response()->json("error", 400, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
-        if ($request->password !== $request->passwordConfirm) return response()->json("error", 400, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        if ($user) return parent::responseJSON('Пользователь уже существует', 400);
+        if ($request->password != $request->passwordConfirm) return parent::responseJSON($request->passwordConfirm, 400);
 
         $new_user = User::createUser($request);
 
-        if ($new_user) return response()->json('success', 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        if ($new_user) return parent::responseJSON('success', 200);
     }
 }

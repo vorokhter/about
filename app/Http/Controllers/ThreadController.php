@@ -16,7 +16,7 @@ class ThreadController extends Controller
 
         return view('includes.thread-list', [
             'threads' => $threads,
-            'currentUser' => ['id' => $request->session()->get("user")->id, 'name' => $request->session()->get("user")->name],
+            'current_user' => ['id' => $request->session()->get("user")->id, 'name' => $request->session()->get("user")->name],
         ]);
     }
 
@@ -48,7 +48,7 @@ class ThreadController extends Controller
 
         return view('includes.message-list', [
             'messages' =>  $messages,
-            'currentUserId' => $request->session()->get("user")->id,
+            'current_user_id' => $request->session()->get("user")->id,
         ]);
     }
 
@@ -56,7 +56,6 @@ class ThreadController extends Controller
     {
         $new_message = Message::createMessage(json_decode($request->getContent())->text, json_decode($request->getContent())->threadId, $request->session()->get("user")->id);
 
-        if ($new_message) return response()->json('success', 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
-        return response()->json("error", 400, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        if ($new_message) return parent::responseJSON('success', 200);
     }
 }

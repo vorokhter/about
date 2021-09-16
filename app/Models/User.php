@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $fillable = ['name', 'email', 'password', 'portrait'];
     protected $table = 'users';
+    protected $fillable = ['name', 'email', 'password', 'portrait'];
 
     use HasFactory;
 
@@ -17,19 +17,18 @@ class User extends Model
         return self::where('email', $email)->first();
     }
 
+    public static function getUserNameById($id)
+    {
+        return self::where('id', $id)->first()->name;
+    }
+
     public static function createUser($request)
     {
-        $new_user = self::create([
+        return self::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
-        return $new_user;
-    }
-
-    public static function getUserNameById($id)
-    {
-        return self::where('id', $id)->first()->name;
     }
 
     public static function searchUser($text)
