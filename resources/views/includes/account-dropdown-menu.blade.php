@@ -21,7 +21,7 @@
 </script>
 
 <div class="dropdown">
-    <a class="nav-link dropdown-toggle p-0 text-primary fw-bold" style="font-size: 14px;" href="#" role="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle text-primary" href="#" role="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
         {{ $current_user['name'] }}
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">

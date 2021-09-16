@@ -1,8 +1,8 @@
 $(document).ready(function () {
     getThreadList();
 
-    let currentThreadId;
     let timerId;
+    let currentThreadId;
 
     const messageList = $("#message-list");
     const threadList = $("#thread-list");
