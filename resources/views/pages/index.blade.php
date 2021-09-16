@@ -9,21 +9,11 @@
 @include('includes.header')
 
 <div class="container" style="max-width: 960px;">
-    <div class="row">
-        <div class="col-md-3">
-
-            <input id="input-search" class="form-control mt-3" type="search" name="search" placeholder="Поиск">
-            <ul id="search-list" class="list-group"></ul>
-
-            <ul id="thread-list" class="list-group mt-3"></ul>
-
-        </div>
-        <div class="col-md-9">
-
-            <div id="message-list" class="border rounded-2 mt-3 overflow-auto bg-white pt-2 pb-3" style="width: 100%; height: 50vh;"></div>
-
+    <div class="d-flex align-items-start mt-3 p-3 border rounded-2 bg-white">
+        <div class="nav col-md-2 nav-pills" id="thread-list" role="tablist" aria-orientation="vertical"></div>
+        <div class="tab-content col-md-10">
+            <div id="message-list" class="overflow-auto" style="height: 50vh;"></div>
             <input id="input-message" class="form-control mt-3" type="text" name="message" placeholder="Введите сообщение">
-
         </div>
     </div>
 </div>
