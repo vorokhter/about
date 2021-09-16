@@ -1,3 +1,3 @@
 @foreach($threads as $thread)
-<button class="nav-link thread-title w-100" data-thread-id="{{$thread->id}}" data-bs-toggle="pill" type="button" role="tab">{{\App\Http\Controllers\ThreadController::getThreadTitle($current_user, $thread)}}</button>
+<div class="list-group-item thread-title" style="cursor: pointer;" data-thread-id="{{$thread->id}}">{{\App\Http\Controllers\ThreadController::getThreadTitle($current_user, $thread)}}</div>
 @endforeach

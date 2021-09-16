@@ -27,6 +27,7 @@ $(document).ready(function () {
             }),
             dataType: "text",
         }).then((result) => {
+            $("#thread").show();
             messageList.html(result);
             messageList.scrollTop(messageList.prop("scrollHeight"));
         });
@@ -41,6 +42,8 @@ $(document).ready(function () {
 
             $(".thread-title").on("click", function (event) {
                 currentThreadId = $(this).attr("data-thread-id");
+
+                $("#thread").hide();
 
                 clearInterval(timerId);
                 startMessagesInterval();
