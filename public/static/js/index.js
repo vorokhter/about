@@ -6,10 +6,7 @@ $(document).ready(function () {
 
     const messageList = $("#message-list");
     const threadList = $("#thread-list");
-    const searchList = $("#search-list");
-
     const inputMessage = $("#input-message");
-    const inputSearch = $("#input-search");
 
     function startMessagesInterval() {
         getMessageList();
@@ -63,32 +60,5 @@ $(document).ready(function () {
                 text: inputMessage.val().trim(),
             }),
         }).then((result) => inputMessage.val(""));
-    });
-
-    inputSearch.on("keypress", function (event) {
-        api.post({
-            url: "/user/search-user",
-            body: JSON.stringify({
-                text: inputSearch.val(),
-            }),
-            dataType: "text",
-        }).then((result) => {
-            searchList.empty();
-            searchList.html(result);
-
-            $(".user-name").on("click", function (event) {
-                api.post({
-                    url: "/thread/personal",
-                    body: JSON.stringify({
-                        userId: $(this).attr("data-user-id"),
-                    }),
-                }).then((result) => {
-                    inputSearch.val("");
-                    searchList.empty();
-
-                    getThreadList();
-                });
-            });
-        });
     });
 });

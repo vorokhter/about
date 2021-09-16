@@ -7,6 +7,7 @@ use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\ThreadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/users', [UserController::class, 'users'])->name('users');
 
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');

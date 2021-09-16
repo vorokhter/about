@@ -11,7 +11,7 @@
 <div class="container" style="max-width: 960px;">
     <div class="row">
         <div class="col-md-3 overflow-auto mt-3">
-            <div id="thread-list" class="border rounded-1 list-group-flush p-3 bg-white shadow" style="max-height: 50vh;"></div>
+            <div id="thread-list"></div>
         </div>
         <div id="thread" class="col-md-9  mt-3" style="display:none">
             <div class="p-3 border rounded-1 bg-white shadow">
