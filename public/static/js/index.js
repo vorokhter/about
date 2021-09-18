@@ -4,6 +4,7 @@ $(document).ready(function () {
     let timerId;
     let currentThreadId;
 
+    const userBar = $("#user-bar");
     const messageList = $("#message-list");
     const threadList = $("#thread-list");
     const inputMessage = $("#input-message");
@@ -14,6 +15,18 @@ $(document).ready(function () {
         timerId = setInterval(() => {
             getMessageList();
         }, 2000);
+    }
+
+    function getUserBar() {
+        api.post({
+            url: "/thread/user-bar",
+            body: JSON.stringify({
+                threadId: currentThreadId,
+            }),
+            dataType: "text",
+        }).then((result) => {
+            userBar.html(result);
+        });
     }
 
     function getMessageList() {
@@ -42,6 +55,7 @@ $(document).ready(function () {
 
                 $("#thread").hide();
 
+                getUserBar();
                 clearInterval(timerId);
                 startMessagesInterval();
             });

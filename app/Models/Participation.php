@@ -25,4 +25,10 @@ class Participation extends Model
         return self::join('users', 'participation.user_id', '=', 'users.id')
             ->where("participation.thread_id", $thread_id)->first()->name;
     }
+
+    public static function getUserByPersonalId($personal_id)
+    {
+        return self::select('users.id', 'users.name', 'users.avatar')->join('users', 'participation.user_id', '=', 'users.id')
+            ->where("participation.thread_id", $personal_id)->first();
+    }
 }

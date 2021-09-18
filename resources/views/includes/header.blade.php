@@ -8,7 +8,7 @@
             &nbsp;Чтобы писать сообщения
         </a>
 
-        <div class="d-flex flex-nowrap" style="font-size: 14px;">
+        <div class="d-flex flex-nowrap align-items-center" style="font-size: 14px;">
             <a class="nav-link text-primary home" href="#">Список чатов</a>
             <a class="nav-link text-primary users" href="#">Поиск пользователей</a>
             @include('includes.account-dropdown-menu')

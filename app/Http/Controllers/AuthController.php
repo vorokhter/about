@@ -42,7 +42,7 @@ class AuthController extends Controller
         $user = User::getUserByEmail($request->email);
 
         if ($user) return parent::responseJSON('Пользователь уже существует', 400);
-        if ($request->password != $request->passwordConfirm) return parent::responseJSON($request->passwordConfirm, 400);
+        if ($request->password != $request->passwordConfirm) return parent::responseJSON('Пароли не совпадают', 400);
 
         $new_user = User::createUser($request);
 

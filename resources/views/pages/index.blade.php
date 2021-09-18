@@ -15,6 +15,9 @@
         </div>
         <div id="thread" class="col-md-9 mt-4" style="display:none">
             <div class="border rounded-1 bg-white shadow">
+                <div class="p-3 border-bottom">
+                    <div id="user-bar"></div>
+                </div>
                 <div class="p-3">
                     <div id="message-list" class="overflow-auto" style="height: 45vh;"></div>
                 </div>

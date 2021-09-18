@@ -21,6 +21,11 @@ class Thread extends Model
             ->first();
     }
 
+    public static function getThreadById($id)
+    {
+        return self::where('id', $id)->first();
+    }
+
     public static function getThreadList($user_id)
     {
         return self::join('participation', 'threads.id', '=', 'participation.thread_id')

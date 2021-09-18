@@ -52,6 +52,21 @@ class ThreadController extends Controller
         ]);
     }
 
+    public function getUserBar(Request $request)
+    {
+        $thread = Thread::getThreadById(json_decode($request->getContent())->threadId);
+
+        //if ($thread->personal == 0) return $thread->title;
+
+        $current_user = $request->session()->get("user");
+
+        $user = ($thread->creator_id == $current_user->id) ? Participation::getUserByPersonalId($thread->id) : User::getUserByCreatorId($thread->creator_id);
+
+        return view('includes.user-bar', [
+            'user' =>  $user,
+        ]);
+    }
+
     public function sendMessage(Request $request)
     {
         $new_message = Message::createMessage(json_decode($request->getContent())->text, json_decode($request->getContent())->threadId, $request->session()->get("user")->id);
