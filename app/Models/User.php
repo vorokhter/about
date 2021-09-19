@@ -38,6 +38,7 @@ class User extends Model
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'avatar' => '/content/default-avatar.jpg',
         ]);
     }
 
