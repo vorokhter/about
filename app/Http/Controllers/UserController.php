@@ -34,6 +34,14 @@ class UserController extends Controller
         ]);
     }
 
+    public function getAllUsers(Request $request)
+    {
+
+        if ($users = User::getAllUsers()) return view('includes.user-list', [
+            'users' =>  $users,
+        ]);
+    }
+
     public function editUser(Request $request)
     {
         $user = User::getUserByEmail($request->email);

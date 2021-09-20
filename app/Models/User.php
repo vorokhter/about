@@ -47,6 +47,11 @@ class User extends Model
         return self::select('id', 'name', 'avatar')->whereRaw("name LIKE '%$text%'")->get();
     }
 
+    public static function getAllUsers()
+    {
+        return self::select('id', 'name', 'avatar')->get();
+    }
+
     public static function editAvatar($user_id, $image)
     {
         return self::where('id', $user_id)

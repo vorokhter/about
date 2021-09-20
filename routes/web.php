@@ -22,5 +22,6 @@ Route::get('/thread/thread-list', [ThreadController::class, 'getThreadList'])->n
 Route::post('/thread/send-message', [ThreadController::class, 'sendMessage'])->name('thread.sendMessage');
 
 Route::post('/user/search-user', [UserController::class, 'searchUser'])->name('user.searchUser');
+Route::get('/user/get-users', [UserController::class, 'getAllUsers'])->name('user.getAllUsers');
 Route::post('/user/edit-user', [UserController::class, 'editUser'])->name('user.editUser');
 Route::post('/user/edit-avatar', [UserController::class, 'editAvatar'])->name('user.editAvatar');

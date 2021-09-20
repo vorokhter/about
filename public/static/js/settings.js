@@ -1,5 +1,6 @@
 $(document).ready(function () {
     let avatarImage;
+    const imageTypes = ["image/jpeg", "image/png", "image/x-png", "image/gif"];
 
     const settingsForm = $("#settings-form");
     const settingsName = $("#settings-name");
@@ -9,8 +10,18 @@ $(document).ready(function () {
     const settingsAvatar = $("#settings-avatar");
 
     settingsAvatar.on("change", function (event) {
-        let image = $(this).get(0).files[0];
-        let reader = new FileReader();
+        $(".settings-error").text("");
+
+        const image = $(this).get(0).files[0];
+
+        if (!imageTypes.includes(image.type)) {
+            $(".settings-error").text(
+                "Неверный тип файла, необходимо выбрать изображение"
+            );
+            return;
+        }
+
+        const reader = new FileReader();
 
         reader.onloadend = function () {
             avatarImage = reader.result;

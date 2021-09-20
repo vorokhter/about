@@ -12,6 +12,7 @@
     <link href="/dist/css/main.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/static/js/api.js"></script>
+    <script src="/static/js/utils.js"></script>
     <title>@yield('title')</title>
 </head>
 
