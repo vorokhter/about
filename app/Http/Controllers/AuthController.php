@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use \App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -21,7 +22,7 @@ class AuthController extends Controller
 
         if (!$user) return parent::responseJSON('Пользователя не существует', 400);
 
-        if ($request->password != $user->password) return parent::responseJSON('Неправильный пароль', 400);
+        if (!Hash::check($request->password, $user->password)) return parent::responseJSON('Неправильный пароль', 400);
 
         $request->session()->put('user', $user);
         return parent::responseJSON('success', 200);
