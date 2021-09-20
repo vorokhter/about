@@ -1,14 +1,21 @@
 function debounce(f, ms) {
-    let isCooldown = false;
+    let timeoutId;
+
+    const startTimeout = (args) => {
+        timeoutId = setTimeout(() => {
+            f(...args);
+            clearTimeout(timeoutId);
+        }, ms);
+    };
 
     return function () {
-        if (isCooldown) return;
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            startTimeout(arguments);
+            return;
+        }
 
-        f.apply(this, arguments);
-
-        isCooldown = true;
-
-        setTimeout(() => (isCooldown = false), ms);
+        startTimeout(arguments);
     };
 }
 
