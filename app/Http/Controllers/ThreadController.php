@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\Events\ThreadEvent;
 use \App\Models\User;
 use \App\Models\Thread;
 use \App\Models\Message;
@@ -70,6 +71,8 @@ class ThreadController extends Controller
     public function sendMessage(Request $request)
     {
         $new_message = Message::createMessage(json_decode($request->getContent())->text, json_decode($request->getContent())->threadId, $request->session()->get("user")->id);
+
+        event(new ThreadEvent($new_message));
 
         if ($new_message) return parent::responseJSON('success', 200);
     }

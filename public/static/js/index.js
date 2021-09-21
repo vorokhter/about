@@ -9,13 +9,10 @@ $(document).ready(function () {
     const threadList = $("#thread-list");
     const inputMessage = $("#input-message");
 
-    function startMessagesInterval() {
-        getMessageList();
-
-        timerId = setInterval(() => {
-            getMessageList();
-        }, 2000);
-    }
+    const threadChannel = pusher.subscribe("thread-channel");
+    threadChannel.bind("new-message", function (data) {
+        if (data.new_message.thread_id == currentThreadId) getMessageList();
+    });
 
     function getUserBar() {
         api.post({
@@ -56,8 +53,7 @@ $(document).ready(function () {
                 $("#thread").hide();
 
                 getUserBar();
-                clearInterval(timerId);
-                startMessagesInterval();
+                getMessageList();
             });
         });
     }
