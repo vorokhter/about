@@ -9,12 +9,14 @@ $next_time = strtotime($message->created_at);
 $difference = ceil(($next_time - $last_time) / 60);
 ?>
 <div class="container mt-2 w-100 d-flex flex-nowrap">
-    @if($message->user_id != $last_id or $difference > 5) <img id="header-avatar" src="{{\App\Models\User::getUserAvatarById($message->user_id)}}" alt="аватар пользователя" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 16px;">
-    @else
-    <div style="width: 52px;"></div>
-    @endif
+    <div class="d-flex justify-content-start" style="width: 52px;">
+        @if($message->user_id != $last_id or $difference > 5)
+        <img id="header-avatar" src="{{\App\Models\User::getUserAvatarById($message->user_id)}}" alt="аватар пользователя" style="width: 36px; height: 36px; border-radius: 50%;">
+        @endif
+    </div>
     <div>
-        @if($message->user_id != $last_id or $difference > 5) <div class="d-flex flex-nowrap" style="font-size: 12.5px;">
+        @if($message->user_id != $last_id or $difference > 5)
+        <div class="d-flex flex-nowrap" style="font-size: 12.5px;">
             <div class="text-primary">{{\App\Models\User::getUserNameById($message->user_id)}}</div>
             <div class="text-muted" style="margin-left: 5px;">{{date("H:i d.m.y", strtotime($message->created_at))}}</div>
         </div>
