@@ -73,7 +73,7 @@ class User extends Model
     public static function editPassword($user_id, $password)
     {
         return self::where('id', $user_id)
-            ->update(['password' => $password]);
+            ->update(['password' => Hash::make($password)]);
     }
 
     public static function editAvatar($user_id, $image)
