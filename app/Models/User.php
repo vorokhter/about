@@ -13,6 +13,11 @@ class User extends Model
 
     use HasFactory;
 
+    public static function getUserById($id)
+    {
+        return self::where('id', $id)->first();
+    }
+
     public static function getUserByEmail($email)
     {
         return self::where('email', $email)->first();
@@ -51,6 +56,24 @@ class User extends Model
     public static function getAllUsers()
     {
         return self::select('id', 'name', 'avatar')->get();
+    }
+
+    public static function editName($user_id, $name)
+    {
+        return self::where('id', $user_id)
+            ->update(['name' => $name]);
+    }
+
+    public static function editEmail($user_id, $email)
+    {
+        return self::where('id', $user_id)
+            ->update(['email' => $email]);
+    }
+
+    public static function editPassword($user_id, $password)
+    {
+        return self::where('id', $user_id)
+            ->update(['password' => $password]);
     }
 
     public static function editAvatar($user_id, $image)

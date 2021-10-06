@@ -12,7 +12,6 @@
     <link href="/dist/css/main.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="/static/js/squareCroper.js"></script>
     <script src="/static/js/api.js"></script>
     <script src="/static/js/utils.js"></script>
     <script src="/static/js/pusher.js"></script>

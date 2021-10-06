@@ -44,15 +44,29 @@ class UserController extends Controller
 
     public function editUser(Request $request)
     {
-        $user = User::getUserByEmail($request->email);
+        $user_id = $request->session()->get("user")->id;
+        $name = json_decode($request->getContent())->name;
+        $email = json_decode($request->getContent())->email;
+        $password = json_decode($request->getContent())->password;
+        $password_confirm = json_decode($request->getContent())->passwordConfirm;
 
-        if ($user) return parent::responseJSON('Пользователь уже существует', 400);
+        if (strlen($name) > 0) User::editName($user_id, $name);
 
-        if ($request->password != $request->passwordConfirm) return parent::responseJSON('Пароли не совпадают', 400);
+        if (strlen($email) > 0) {
+            if (!User::getUserByEmail($email)) User::editEmail($user_id, $email);
+            else return parent::responseJSON('Почта занята', 400);
+        }
 
-        $edit_user = User::editUser($request);
+        if (strlen($password) > 0) {
+            if ($password === $password_confirm) User::editPassword($user_id, $password);
+            else return parent::responseJSON('Пароли не совпадают', 400);
+        }
 
-        if ($edit_user) return parent::responseJSON('success', 200);
+        $user = User::getUserById($user_id);
+
+        $request->session()->put('user', $user);
+
+        return parent::responseJSON('success', 200);
     }
 
     public function editAvatar(Request $request)
@@ -61,7 +75,7 @@ class UserController extends Controller
 
         if (!$new_avatar) return parent::responseJSON('Смена аватара не удалась', 400);
 
-        $user = User::getUserByEmail($request->session()->get("user")->email);
+        $user = User::getUserById($request->session()->get("user")->id);
 
         $request->session()->put('user', $user);
 

@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     settingsForm.on("submit", function (event) {
         event.preventDefault();
-        // editUser();
+        editUser();
         if (avatarImage) editAvatar();
     });
 
@@ -40,14 +40,14 @@ $(document).ready(function () {
         api.post({
             url: "/user/edit-user",
             body: JSON.stringify({
-                name: settingsName.val(),
-                email: settingsEmail.val(),
-                password: settingsPass.val(),
-                passwordConfirm: settingsPassConf.val(),
+                name: settingsName.val().trim(),
+                email: settingsEmail.val().trim(),
+                password: settingsPass.val().trim(),
+                passwordConfirm: settingsPassConf.val().trim(),
             }),
         })
             .then((result) => {
-                console.log(result);
+                location.reload();
             })
             .catch((error) => {
                 $(".settings-error").text(error.responseJSON);
@@ -62,7 +62,7 @@ $(document).ready(function () {
             }),
         })
             .then((result) => {
-                window.location.href = "/settings";
+                location.reload();
             })
             .catch((error) => {
                 $(".settings-error").text(error.responseJSON);
