@@ -34,15 +34,6 @@ class ThreadController extends Controller
         return $new_thread;
     }
 
-    public static function getThreadTitle($user, $thread)
-    {
-        if ($thread->personal == 0) return $thread->title;
-
-        if ($thread->creator_id == $user['id']) return Participation::getUserName($thread->id);
-
-        return User::getUserNameById($thread->creator_id);
-    }
-
     public function getMessageList(Request $request)
     {
         $messages = Message::getMessageList(json_decode($request->getContent())->threadId);
@@ -50,6 +41,17 @@ class ThreadController extends Controller
         return view('includes.message-list', [
             'messages' =>  $messages,
             'current_user_id' => $request->session()->get("user")->id,
+        ]);
+    }
+
+    public static function getThreadBar($user, $thread)
+    {
+        // if ($thread->personal == 0) return $thread->title;
+
+        $user = ($thread->creator_id == $user['id']) ? Participation::getUserByThread($thread->id) : User::getUserById($thread->creator_id);
+
+        return view('includes.thread-bar', [
+            'user' =>  $user,
         ]);
     }
 

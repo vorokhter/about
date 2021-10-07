@@ -47,7 +47,7 @@ $(document).ready(function () {
         }).then((result) => {
             threadList.html(result);
 
-            $(".thread-title").on("click", function (event) {
+            $(".thread-item").on("click", function (event) {
                 currentThreadId = $(this).attr("data-thread-id");
 
                 $("#thread").hide();

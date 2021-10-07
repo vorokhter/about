@@ -20,10 +20,10 @@ class Participation extends Model
         ]);
     }
 
-    public static function getUserName($thread_id)
+    public static function getUserByThread($thread_id)
     {
-        return self::join('users', 'participation.user_id', '=', 'users.id')
-            ->where("participation.thread_id", $thread_id)->first()->name;
+        return self::select('users.id', 'users.name', 'users.avatar')->join('users', 'participation.user_id', '=', 'users.id')
+            ->where("participation.thread_id", $thread_id)->first();
     }
 
     public static function getUserByPersonalId($personal_id)

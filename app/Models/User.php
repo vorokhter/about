@@ -23,11 +23,6 @@ class User extends Model
         return self::where('email', $email)->first();
     }
 
-    public static function getUserNameById($id)
-    {
-        return self::where('id', $id)->first()->name;
-    }
-
     public static function getUserAvatarById($id)
     {
         return self::where('id', $id)->first()->avatar;

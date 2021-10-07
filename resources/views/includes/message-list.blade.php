@@ -17,7 +17,7 @@ $difference = ceil(($next_time - $last_time) / 60);
     <div>
         @if($message->user_id != $last_id or $difference > 5)
         <div class="d-flex flex-nowrap" style="font-size: 12.5px;">
-            <div class="text-primary">{{\App\Models\User::getUserNameById($message->user_id)}}</div>
+            <div class="text-primary">{{\App\Models\User::getUserById($message->user_id)->name}}</div>
             <div class="text-muted" style="margin-left: 5px;">{{date("H:i d.m.y", strtotime($message->created_at))}}</div>
         </div>
         @endif
