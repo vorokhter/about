@@ -50,7 +50,7 @@ class ThreadController extends Controller
 
         $user = ($thread->creator_id == $user['id']) ? Participation::getUserByThread($thread->id) : User::getUserById($thread->creator_id);
 
-        return view('includes.thread-bar', [
+        return view('includes.thread-item', [
             'user' =>  $user,
         ]);
     }
