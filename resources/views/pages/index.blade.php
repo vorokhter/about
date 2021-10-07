@@ -10,8 +10,8 @@
 
 <div class="container" style="max-width: 960px;">
     <div class="row">
-        <div class="col-md-3 overflow-auto mt-4">
-            <div id="thread-list"></div>
+        <div class="col-md-3 mt-4">
+            <div id="thread-list" class="shadow overflow-auto" style="max-height: 45vh;"></div>
         </div>
         <div id="thread" class="col-md-9 mt-4" style="display:none">
             <div class="border rounded-1 bg-white shadow">
