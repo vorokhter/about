@@ -18,6 +18,11 @@ class Message extends Model
         return self::where('thread_id', "=", $thread_id)->get();
     }
 
+    public static function getLastMessage($thread_id)
+    {
+        return self::where('thread_id', "=", $thread_id)->get()->last();
+    }
+
     public static function createMessage($text, $thread_id, $user_id)
     {
         return self::create([

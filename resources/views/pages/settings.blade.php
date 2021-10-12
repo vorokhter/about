@@ -10,7 +10,7 @@
 
 <div class="container" style="max-width: 960px;">
     <div class="row justify-content-center">
-        <div id="settings" class="col-md-9 mt-4">
+        <div id="settings" class="col-md-8">
             <div class="border rounded-1 bg-white shadow">
                 <form id="settings-form" class="p-3">
                     <div class="row">

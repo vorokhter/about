@@ -34,10 +34,25 @@ $(document).ready(function () {
             }),
             dataType: "text",
         }).then((result) => {
+            $("#thread-list").hide();
             $("#thread").show();
+
+            $(".thread-back").on("click", function (event) {
+                getThreadList();
+            });
+
             messageList.html(result);
             messageList.scrollTop(messageList.prop("scrollHeight"));
         });
+    }
+
+    function getLastMessage() {
+        api.post({
+            url: "/thread/last-message",
+            body: JSON.stringify({
+                threadId: currentThreadId,
+            }),
+        }).then((result) => {});
     }
 
     function getThreadList() {
@@ -55,12 +70,13 @@ $(document).ready(function () {
                 getUserBar();
                 getMessageList();
             });
+
+            $("#thread").hide();
+            $("#thread-list").show();
         });
     }
 
-    inputMessage.on("keypress", function (event) {
-        if (event.which != 13) return;
-
+    function sendMessage() {
         if (inputMessage.val().trim().length <= 0) return;
 
         api.post({
@@ -70,5 +86,14 @@ $(document).ready(function () {
                 text: inputMessage.val().trim(),
             }),
         }).then((result) => inputMessage.val(""));
+    }
+
+    inputMessage.on("keypress", function (event) {
+        if (event.which != 13) return;
+        sendMessage();
+    });
+
+    $("#send-message").on("click", function (event) {
+        sendMessage();
     });
 });

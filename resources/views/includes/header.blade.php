@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-light bg-white shadow">
+<div class="navbar navbar-expand-lg navbar-light bg-white shadow mb-4">
     <div class="container d-flex" style="max-width: 960px;">
         <a class="navbar-brand text-primary fw-bold" href="{{ url('/') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-right-quote" viewBox="0 0 16 16">
@@ -9,8 +9,8 @@
         </a>
 
         <div class="d-flex flex-nowrap align-items-center" style="font-size: 14px;">
-            <a class="nav-link text-primary home" href="#">Список чатов</a>
-            <a class="nav-link text-primary users" href="#">Поиск пользователей</a>
+            <a class="nav-link text-primary home" href="#">Сообщения</a>
+            <a class="nav-link text-primary users" href="#">Пользователи</a>
             @include('includes.account-dropdown-menu')
         </div>
     </div>

@@ -44,14 +44,33 @@ class ThreadController extends Controller
         ]);
     }
 
-    public static function getThreadBar($user, $thread)
+    public static function getLastMessage($thread_id, $current_user_id)
+    {
+        $last_message = Message::getLastMessage($thread_id);
+
+        if (!$last_message) {
+            $last_message = (object)[];
+            $last_message->text = 'Пока что нет сообщений';
+            $last_message->user_id = -1;
+        }
+
+        if ($last_message->user_id == $current_user_id) {
+            $last_message->text = 'Вы: ' . $last_message->text;
+        }
+
+        return $last_message;
+    }
+
+    public static function getThreadItem($current_user, $thread)
     {
         // if ($thread->personal == 0) return $thread->title;
 
-        $user = ($thread->creator_id == $user['id']) ? Participation::getUserByThread($thread->id) : User::getUserById($thread->creator_id);
+        $user = ($thread->creator_id == $current_user['id']) ? Participation::getUserByThread($thread->id) : User::getUserById($thread->creator_id);
 
         return view('includes.thread-item', [
             'user' =>  $user,
+            'thread' =>  $thread,
+            'current_user_id' => $current_user['id'],
         ]);
     }
 
