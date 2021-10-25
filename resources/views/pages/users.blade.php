@@ -1,6 +1,6 @@
 @extends('layouts.main-layout')
 
-@section('title', 'About | Поиск')
+@section('title', 'Пользователи')
 
 @section('content')
 

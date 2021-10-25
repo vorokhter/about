@@ -1,6 +1,6 @@
 @extends('layouts.main-layout')
 
-@section('title', 'About | Настройки')
+@section('title', 'Настройки')
 
 @section('content')
 
