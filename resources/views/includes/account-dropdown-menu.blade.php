@@ -26,7 +26,7 @@
 </script>
 
 <div class="dropdown d-flex flex-nowrap">
-    <a class="nav-link dropdown-toggle text-primary" href="#" role="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle text-primary" href="#" role="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0px;">
         {{ $current_user['name'] }}
         <img id="header-avatar" src="{{ $current_user['avatar'] }}" alt="аватар пользователя" style="width: 32px; height: 32px; border-radius: 50%; margin: 0px 4px;">
     </a>
