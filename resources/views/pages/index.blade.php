@@ -6,9 +6,10 @@
 
 <script src="/static/js/index.js"></script>
 
+@include('includes.header')
+
 <div class="container" style="max-width: 960px;">
     <div class="row justify-content-center">
-        @include('includes.header')
         <div class="col-md-8">
             <div id="thread-list"></div>
         </div>
