@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-light bg-white shadow mb-4">
+<div class="navbar navbar-light rounded-1 bg-white shadow mb-4">
     <div class="container d-flex flex-nowrap" style="max-width: 960px;">
         <a class="navbar-brand text-primary fw-bold" href="{{ url('/') }}">
             Мессенджер
