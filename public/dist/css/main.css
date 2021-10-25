@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media (max-width: 575.98px) {
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (max-width: 575.98px) {
   .nav-text {
     display: none;
   }
