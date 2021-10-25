@@ -8,7 +8,7 @@
 
 @include('includes.header')
 
-<div class="container" style="max-width: 960px;" style="min-height: 100vh;">
+<div class="container" style="max-width: 960px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div id="thread-list"></div>
