@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- This comment line needed for bootstrap to work on mobile devices -->
 <html lang="en">
 
 <head>
