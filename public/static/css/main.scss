@@ -8,10 +8,10 @@ $theme-colors: (
 
 $font-size-base: 0.8125rem;
 
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
 @media (max-width: 575.98px) {
     .nav-text {
         display: none;
     }
 }
-
-@import "../../../node_modules/bootstrap/scss/bootstrap";
