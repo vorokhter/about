@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media (max-width: 580px) {
+@media all and (max-width: 575.98px) {
   .nav-text {
     display: none;
   }
